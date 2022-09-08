@@ -1,0 +1,294 @@
+---
+title: "R Markdown"
+author: "Camila Sánchez"
+date: "2022-08-02"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Curso R parte 3
+
+### Introducción al curso R parte 3
+
+
+Hoy ya estás viendo el curso 3 de R, habrás recorrido un amplio camino, de programación, estadística y matemáticas, en este curso vamos a ver R markdown para que puedas comunicar tus resultados como científico de datos. Veremos el paquete purr con estructuras de datos similares a las que tiene R en su librería matriz, pero con funcionalidades muy interesantes para desarrollo de tus proyectos en R, veremos los modelos con modelr mediante un ejemplo, dando así vida a la parte más interesante de la ciencia de datos, la predicción. Y veremos un PCA con clustering de un ejemplo muy ameno. Bienvenido de nuevo a tu aprendizaje en R y muchas gracias por estar aquí,
+
+
+## Módulo 1
+
+### Bienvenida Módulo 1
+
+En este módulo revisaremos qué es R Markdown, su formato, sintaxis, funciones, bloque de Código, y tablas, el uso que le puedes dar y las ventajas que tienes al poseerlo desde R directamente.
+
+Quizás has tenido un acercamiento o conoces Markdown como un lenguaje de marcado que de manera independiente da orden a tus proyectos, artículos o trabajos, ya sea que los quieras publicar en tu página web, entregar en pdf o incluso en hoja de procesador de texto (word), imagínate esta garantía de orden y presentación, junto con gráficas dinámicas, resultados de código de R, maravilloso ¿verdad?.
+
+El objetivo de este módulo es que aprendas cómo usarlo para tus propósitos de comunicación con:
+
+1. Quienes toman decisiones en la empresa en la que trabajas, que tendrán su enfoque en las conclusiones y gráficas de resultados finales; 
+
+2. Para colaboración con tu grupo de trabajo, que tienen enfoque tanto en conclusiones como en el modo en que llegaste a ellas, 
+
+3. A modo de laboratorio, usando Markdown como tu cuadernillo, capturando lo que vas pensando cuando lo vas trabajando. 
+
+
+### ¿Qué es R Markdown?- Introducción
+
+A continuación el texto de ejemplo cuando creas un nuevo documento de R Markdown:
+
+"This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```
+{r cars}
+summary(cars)
+```
+"
+
+R Markdown provee un marco de escritura para analítica de datos, que combina código, resultados y comentarios en prosa. Lo primero es tener Rstudio, necesitas el paquete de rmarkdown, pero no necesitas cargarlo o instalarlo de forma explícita, ya que, automáticamente se realiza cuando sea necesario en la ejecución del proyecto.
+
+Un archivo de R Markdown es un texto plano que tiene la extensión .rmd. Comienzas con tu propio archivo, seleccionando File>New file> R Markdown.
+
+En la pestaña que sale diligencias el título, autor y fecha (si es diferente a la del día de hoy), seleccionas si quieres en:
+
+- documento, 
+- presentación, 
+- Shiny que es un paquete de R que facilita la creación de aplicaciones web interactivas directamente desde R, o 
+- plantillas, 
+
+y los distintos formatos a partir de tu elección.
+
+La ayuda para saber más sobre R Markdown la encuentras en la ruta:
+**Help > Cheatsheets > R Markdown Cheat**
+**Help > Cheatsheets > R Markdown Reference Guide**
+
+### Formato de R Markdown
+
+Cuando abres un archivo .Rmd, encuentras una interfaz tipo cuadernillo, donde tienes el código que puede ser reproducido con el ícono de ejecución, lo cual te permite ver el resultado y continuar con tu código o comentarios. El reporte completo con el texto, código y resultados, lo consigues dando clic en “Knit”, tejer en inglés y se genera un archivo, de acuerdo al formato que hayas seleccionado.
+
+
+El contenido de un R Markdown es 
+
+#### Encabezado
+Se crea automáticamente  con el asistente que sale cuando inicias con la creación de tu cuadernillo y contiene por defecto el título, la fecha, y el tipo de salida del documento, antes y después de este encabezado hay 3 guiones, esto se llama encabezado formato YAML.
+
+**- - - **
+
+title: "R parte 3, R Markdown"
+
+author: "Camila Sánchez Puerto"
+
+date: "2022-"
+
+output: html_document
+
+**- - - **
+
+Para dar un estilo bonito a tu documento HTML: puedes, agregar en output:   
+
+prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    float: true
+    toc: true
+    
+El cual hace mención al paquete prettydoc, nuevo formato de salida para crear documentos HTML.
+
+El theme o tema en español, puede ser:
+- cayman
+
+- tactile
+
+- architect
+
+- leonids
+
+- hpstr
+
+Y sirve también para renderizar expresiones matemáticas, con formato MathJax.
+Se soportan resaltadores como:
+github: Estilo similar a Github
+vignette: Estilo usado por rmarkdown::html_vignette.
+
+
+#### Bloques de código de R 
+
+Tienen 3 comillas y presentan el código que el interprete correrá como instrucciones de lenguaje R.
+
+
+#### Texto mezclado 
+
+Con formatos de texto simple con sintaxis de Markdown.
+
+
+YAML son las siglas de yet another markup language y se trata de un lenguaje de marcado diseñado para representar datos jerárquicos fácil de escribir y leer para humanos.
+
+##### Formato de texto: 
+
+- Asteriscos o guión al piso antes y después de la palabra para cursiva,
+
+   " * Cursiva * " →    *Cursiva*
+   
+   " _ Cursiva _ " →     _Cursiva_
+- Asteriscos dobles o dos guiones al piso antes y después de la palabra para que quede en negrita, 
+
+  " ** Negrita ** "→   **Negrita** 
+  
+  " _ _ Negrita _ _ "→  __Negrita__
+- Los encabezados inician con numeral o tecla almohadilla, el nivel del título depende de la cantidad de asteriscos que antecedente el encabezado. 
+
+ "# Encabezado 1 ejemplo" → 
+ 
+# Encabezado 1 ejemplo
+
+ "### Encabezado 3 ejemplo" → 
+ 
+### Encabezado 3 ejemplo
+
+- Las listas se realizan con asteriscos y espacios o guiones. 
+  * 1
+  * 2
+  * 3
+
+- El enlace abre con un signo menor (<) y cierra con el mayor que (>).
+<https://prettydoc.statr.me/>
+
+
+#### Formato de código: 
+
+- Con el atajo del teclado Ctrl + Alt+ i, 
+
+- Con el ícono insert, o 
+
+- Tipeando 3 comillas sencillas entre llaves la letra r y finalizas con las tres comillas sencillas.
+
+Todo lo que esté dentro de esta estructura será interpretada como código de R, y se mostrará en el archivo que generes; si no quieres que esto suceda, hay casi 60 opciones que personalizan tus bloques de código.
+
+<https://rmarkdown.rstudio.com/authoring_basics.html>
+
+Hay un conjunto de opciones que pueden ayudarte con el mayor control de lo que quieres y lo que no, que aparezca en tu archivo final, respecto al código en R:
+
+**Código original y resultado por defecto**
+
+```{r cars1}
+summary(cars)
+```
+
+**Código original y resultado por defecto**
+```{r pressure1}
+plot(pressure)
+```
+
+**eval = FALSE**  evita que el código sea evaluado, es decir, no es ejecutado y no se generaran resultados. Esto es útil para mostrar códigos de ejemplo, o para deshabilitar un gran bloque de código sin comentar cada línea.
+
+**Código **
+```
+{r pressure, eval= FALSE}
+plot(pressure)
+```
+
+**Resultado**
+
+```{r pressure2, eval=FALSE}
+plot(pressure)
+```
+
+**include = FALSE**  ejecuta el código, pero no muestra el código o los resultados en el documento final. Usa esto para código de configuración que no quieres que sature tu reporte.
+
+**Código**
+```
+{r pressure, include= FALSE}
+plot(pressure)
+```
+
+**Resultado**
+
+```{r pressure3, echo=FALSE}
+plot(pressure)
+```
+
+**echo = FALSE  **evita que se vea el código, pero sí muestra los resultados en el archivo final. Utiliza esto cuando quieres escribir reportes enfocados a personas que no quieren ver el código tácito de R.
+
+**Código**
+
+```
+{r cars, echo= FALSE}
+summary(cars)
+```
+
+**Resultado**
+
+```{r cars2, echo= FALSE}
+summary(cars)
+```
+
+**message = FALSE ** o **warning = FALSE**  evita que aparezcan mensajes o advertencias en el archivo final.
+
+**Código**
+
+```
+{r cars, message= FALSE}
+summary(cars)
+```
+
+**Resultado**
+
+```{r cars3, message= FALSE}
+summary(cars)
+```
+
+### Tablas en R Markdown
+Por defecto, R Markdown imprime data frames y matrices tal como se ven en la consola, pero es posible que las veas con un formato adicional, para esto antes del código de la tabla: introduces knitr:kable( ), entre los paréntesis irá el código que te imprime la tabla. 
+
+**Las 10 primeras filas de iris sin formato adicional.**
+```{r irisTabla}
+data.frame(iris[1:10,])
+```
+
+**Las 10 primeras filas de iris con formato adicional, knithr::kable.**
+```{r irisTabla2}
+knitr::kable(data.frame(iris[1:10,]))
+```
+
+Es posible realizar mayor personalización con paquetes como xtable, pander, tables, stargazer, reac table y ascii.
+
+Con la librería reactable por ejemplo, puedes introducir estilo, filtro, separación por páginas. Y el código es muy sencillo, colocas reactable y entre paréntesis la tabla o data: reactable(data).
+
+```{r irisTabla3, eval=FALSE}
+library(reactable)
+reactable(iris,
+          filterable = TRUE, #crea el filtro al inicio de la tabla
+          columns = list(
+            Petal.Length = colDef(filterable = FALSE)), #quitar filtro en Petal.Length
+          highlight = TRUE,
+          defaultPageSize = 8 #filas por página 
+)
+```
+
+Por ejemplo, aquí veremos la tabla anterior con un tema oscuro:
+
+```{r irisTabla4, eval= FALSE}
+options(reactable.theme = reactableTheme(
+  color = "hsl(233, 9%, 87%)",
+  backgroundColor = "hsl(233, 9%, 19%)",
+  borderColor = "hsl(233, 9%, 22%)",
+  stripedColor = "hsl(233, 12%, 22%)",
+  highlightColor = "hsl(233, 12%, 24%)",
+  inputStyle = list(backgroundColor = "hsl(233, 9%, 25%)"),
+  selectStyle = list(backgroundColor = "hsl(233, 9%, 25%)"),
+  pageButtonHoverStyle = list(backgroundColor = "hsl(233, 9%, 25%)"),
+  pageButtonActiveStyle = list(backgroundColor = "hsl(233, 9%, 28%)")
+))
+reactable(iris,
+          filterable = TRUE, #crea el filtro al inicio de la tabla
+          columns = list(
+            Petal.Length = colDef(filterable = FALSE)), #quitar filtro en Petal.Length
+          highlight = TRUE,
+          defaultPageSize = 8 #filas por página 
+)
+```
+
+Otra cosa que me parece muy interesante y útil de un documento R Markdown es que no necesitas previamente tener instalado un paquete, sino que, lo llamas con library y cuando ejecutas, él se instala si no lo está.
